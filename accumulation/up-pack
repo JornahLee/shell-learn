@@ -1,0 +1,17 @@
+#! /bin/bash
+versionNo=$1
+
+sourceJar="/Users/licong/gitRepository/jornah-api/api-boot/build/libs/jornah-api-null-SNAPSHOT.jar"
+###################
+remotePath="/home/jornah/www/jornah-api/"
+packageName=jornah-api-"$versionNo"-SNAPSHOT.jar
+remoteHost='jornah@52.221.83.132'
+#remoteHost='gce'
+####################
+
+
+[ -z "$versionNo" ] && echo "has no version number" && exit 
+echo "$packageName"
+cp "$sourceJar" ~/jornah-deploy/"$packageName" || exit
+ls  ~/jornah-deploy
+scp  ~/jornah-deploy/"$packageName" "$remoteHost":"$remotePath"
